@@ -40,6 +40,9 @@ class ContactManager {
     }
 }
 
+// fichier Command
+require_once 'Command.php';
+
 // --- Boucle CLI pour commandes ---
 while (true) {
     $line = readline("Entrez votre commande : ");
@@ -50,11 +53,6 @@ while (true) {
     }
 
     if ($line === "list") {
-        $manager = new ContactManager((new DBConnect())->getPDO());
-        $contacts = $manager->findAll();
-
-        foreach ($contacts as $contact) {
-            echo $contact->__toString() . "\n";
-        }
+        (new Command())->list();
     }
 }
