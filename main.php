@@ -40,8 +40,21 @@ class ContactManager {
     }
 }
 
-// --- TEST ---
-$manager = new ContactManager((new DBConnect())->getPDO());
-foreach ($manager->findAll() as $contact) {
-    echo $contact . "\n";
+// --- Boucle CLI pour commandes ---
+while (true) {
+    $line = readline("Entrez votre commande : ");
+
+    if ($line === "quit") {
+        echo "Au revoir !\n";
+        break;
+    }
+
+    if ($line === "list") {
+        $manager = new ContactManager((new DBConnect())->getPDO());
+        $contacts = $manager->findAll();
+
+        foreach ($contacts as $contact) {
+            echo $contact->__toString() . "\n";
+        }
+    }
 }
